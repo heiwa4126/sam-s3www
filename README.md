@@ -13,6 +13,11 @@ S3バケットを作り
 * [jq](https://stedolan.github.io/jq/download/)
 * [yq](https://github.com/kislyuk/yq)
 
+[AWS CloudShell](https://aws.amazon.com/jp/blogs/news/aws-cloudshell-command-line-access-to-aws-resources/)
+からだと、AWS CLIとSAM CLIとjqは最初から入ってますので
+`pip3 install --user -U yq`
+だけでOKで、あとはこのレポジトリをgit cloneするだけ。
+
 
 # デプロイ
 
