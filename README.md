@@ -31,7 +31,7 @@ sam deploy --guided  # 最初の1回。2回目以降は `sam deploy`
 
 `sam deploy --guided`では以下の2つを除いてデフォルトでOK。
 
-* `Parameter BucketName` は S3のバケット名なので、独自の名前をつけてください。
+* `Parameter BucketName` は S3のバケット名なので、世界で唯一の名前をつけてください。
 * `HelloFunction may not have authorization defined, Is this okay? [y/N]:` は `y`で。
 
 無事スタックがデプロイされたら、Outputの
