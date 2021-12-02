@@ -5,6 +5,11 @@ S3バケットを作り
 コンテンツを流し込む
 最低限のプロジェクト。
 
+単にWWWを公開したいだけなら、AWS Amplifyがおすすめ。  
+[【Amplify入門】ReactもVue.jsも使わないシンプルな静的サイトを構築する | DevelopersIO](https://dev.classmethod.jp/articles/amplify-console-simple-static-site/)
+
+あくまでも他のリソースと連携するケースで使うテンプレート。
+
 
 # デプロイに必要なもの
 
