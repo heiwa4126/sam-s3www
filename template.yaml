@@ -5,21 +5,18 @@ Description: >
 
   s3 static www contents bucket example code
 
-Parameters:
-  BucketName:
-    Type: String
-    Default: www-s3www
-
 Globals:
   Function:
     Timeout: 3
+  Api:
+    OpenApiVersion: 3.0.3
 
 Resources:
   S3Bucket:
     Type: AWS::S3::Bucket
     Properties:
       AccessControl: PublicRead
-      BucketName: !Ref BucketName
+      # BucketName: !Ref BucketName
       MetricsConfigurations:
         - Id: EntireBucket
       WebsiteConfiguration:
@@ -27,8 +24,10 @@ Resources:
         ErrorDocument: error.html
     DeletionPolicy: Delete
 
-
 Outputs:
+  S3Bucket:
+    Value: !Ref S3Bucket
+
   S3URL:
     Description: URL of S3 bucket to hold website content
     Value: !Sub "http://${S3Bucket}.s3-website-${AWS::Region}.amazonaws.com/"

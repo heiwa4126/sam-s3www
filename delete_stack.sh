@@ -1,12 +1,18 @@
 #!/bin/sh
 
 ## required tomlq in yq. Try `apt install jq` and `pip3 install yq`
-REGION=`tomlq -r .default.deploy.parameters.region samconfig.toml`
 STACK_NAME=`tomlq -r .default.deploy.parameters.stack_name samconfig.toml`
-eval $(tomlq -r .default.deploy.parameters.parameter_overrides samconfig.toml)
+AWS_REGION=`tomlq -r .default.deploy.parameters.region samconfig.toml`
+export AWS_REGION
+export AWS_PAGER=""
 
-aws s3 rm "s3://$BucketName/" --recursive --region "$REGION"
+getStackOutput() {
+	query=".Stacks[0].Outputs[]|select(.OutputKey==\"$1\").OutputValue"
+	aws cloudformation describe-stacks --stack-name "$STACK_NAME" | jq -r "$query"
+}
 
-aws cloudformation delete-stack \
-    --region "$REGION" \
-    --stack-name "$STACK_NAME"
+S3Bucket=$(getStackOutput 'S3Bucket')
+
+aws s3 rm "s3://$S3Bucket/" --recursive
+
+aws cloudformation delete-stack --stack-name "$STACK_NAME"
